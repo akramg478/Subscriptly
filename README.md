@@ -20,7 +20,7 @@ Subscriptly provides a namespaced, extensible subscription engine with **manual 
 
 ## Features (Free)
 
-- Simple subscription product type
+- Simple subscription product type.
 - Daily, weekly, monthly, and yearly billing
 - Trial periods and sign-up fees
 - Subscription lifecycle: active, on-hold, pending-renewal, cancelled, expired
