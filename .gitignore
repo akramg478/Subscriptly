@@ -1,0 +1,25 @@
+# Composer
+/vendor/
+/vendor/bin/
+
+# PHPUnit
+.phpunit.result.cache
+/phpunit.xml
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local env overrides
+.env
+.env.local
+
+# WordPress.org release artifact (build locally, do not commit)
+/subscriptly-*.zip

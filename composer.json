@@ -1,0 +1,47 @@
+{
+	"name": "subscriptly/subscriptly",
+	"description": "Enterprise WooCommerce subscription management for WordPress.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Akram Ul Haq",
+			"homepage": "https://github.com/akramg478"
+		}
+	],
+	"require": {
+		"php": ">=8.0"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpunit/phpunit": "^9.6",
+		"squizlabs/php_codesniffer": "^3.10",
+		"wp-coding-standards/wpcs": "^3.1",
+		"yoast/phpunit-polyfills": "^2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Subscriptly\\": "packages/core/src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Subscriptly\\Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"test": "phpunit",
+		"test:unit": "phpunit --testsuite=unit",
+		"phpcs": "phpcs",
+		"phpcbf": "phpcbf",
+		"i18n:pot": "wp i18n make-pot . languages/subscriptly.pot --domain=subscriptly --exclude=vendor,tests,node_modules",
+		"i18n:mo": "wp i18n make-mo languages/"
+	},
+	"config": {
+		"sort-packages": true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

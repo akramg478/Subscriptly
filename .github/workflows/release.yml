@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build WordPress.org zip
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install production dependencies
+        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-progress
+
+      - name: Create release zip
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          BUILD_DIR="subscriptly"
+          ZIP_NAME="subscriptly-${VERSION}.zip"
+          rm -rf "$BUILD_DIR"
+          mkdir -p "$BUILD_DIR"
+          rsync -a ./ "$BUILD_DIR"/ \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'tests' \
+            --exclude 'bin' \
+            --exclude 'composer.json' \
+            --exclude 'composer.lock' \
+            --exclude 'phpunit.xml.dist' \
+            --exclude 'phpcs.xml.dist' \
+            --exclude '.editorconfig' \
+            --exclude '.distignore' \
+            --exclude '.gitignore' \
+            --exclude '.gitattributes' \
+            --exclude 'README.md' \
+            --exclude 'LICENSE' \
+            --exclude 'subscriptly-*.zip'
+          zip -r "$ZIP_NAME" "$BUILD_DIR"
+          echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+          generate_release_notes: true
