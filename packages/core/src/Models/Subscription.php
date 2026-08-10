@@ -345,11 +345,11 @@ final class Subscription {
 	 * Get a meta value.
 	 *
 	 * @param string $key Meta key.
-	 * @param mixed  $default Default value.
+	 * @param mixed  $default_value Default value.
 	 * @return mixed
 	 */
-	public function get_meta_value( string $key, $default = null ) {
-		return $this->meta[ $key ] ?? $default;
+	public function get_meta_value( string $key, $default_value = null ) {
+		return $this->meta[ $key ] ?? $default_value;
 	}
 
 	/**

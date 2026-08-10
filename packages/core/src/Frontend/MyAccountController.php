@@ -80,6 +80,7 @@ final class MyAccountController {
 	 * @return string
 	 */
 	public function get_endpoint_title( string $title ): string {
+		unset( $title );
 		return __( 'Subscriptions', 'subscriptly' );
 	}
 

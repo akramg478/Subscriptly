@@ -87,6 +87,7 @@ final class SubscriptionsController {
 	 * @return WP_REST_Response
 	 */
 	public function list_subscriptions( WP_REST_Request $request ): WP_REST_Response {
+		unset( $request );
 		$args = array(
 			'limit'  => 20,
 			'offset' => 0,
